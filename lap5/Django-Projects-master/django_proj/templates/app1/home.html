@@ -1,0 +1,89 @@
+{% extends 'app1/base.html' %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body style="height: 100vh">
+    {% block title_block %}
+    <h1><center>All Students</center></h1>
+
+    {% endblock %} {% block main_block %}
+    <table class="table  table-striped">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Graduated</th>
+        <th colspan="3"><center>Actions</center></th>
+      </tr>
+      {% for st in student_list %}
+      <tr>
+        <td>{{ st.fname }}</td>
+        <td>{{ st.lname }}</td>
+        <td>{{ st.age }}</td>
+        <td>
+          {% if st.is_adult %}
+          <svg
+            style="color: greenyellow"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-check-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+            />
+          </svg>
+          {% else %}
+          <svg
+            style="color: red"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-x-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+            />
+          </svg>
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn btn-warning" href="{% url 'show' st.id %}">Show</a>
+        </td>
+        <td>
+          <a class="btn btn-danger" href="{% url 'del' st.id %}">Delete</a>
+        </td>
+        <td>
+          <a class="btn btn-success" href="{% url 'edit' st.id %}">Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a class="btn btn-primary" href="{% url 'add' %}"> Add New Student</a>
+    <center>
+      <img
+        src="{% static 'img/profile.png' %}"
+        width="250px"
+        ,
+        height="250px"
+      />
+    </center>
+    {% endblock %}
+  </body>
+</html>

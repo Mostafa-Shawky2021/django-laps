@@ -1,0 +1,22 @@
+{% extends 'app1/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show</title>
+  </head>
+  <body>
+    {% block title_block %}
+    <h1>Student Details Screen</h1>
+    <a href="{% url 'home' %}">Back</a>
+    {% endblock %} {%block main_block %}
+    <hr />
+
+    <b>First Name: </b> {{ st.fname }} <b>Last Name: </b> {{ st.lname }}
+    <b>Age: </b> {{ st.age }} <b>Graduated: </b> {{ st.is_adult }}
+    <b>Track: </b> {{ st.student_track }} {% endblock %}
+  </body>
+</html>
